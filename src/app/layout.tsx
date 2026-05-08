@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider, Show, UserButton } from "@clerk/nextjs";
-import { AuthButtons } from "./components/AuthButtons";
+import { AuthButtons } from "@/components/AuthButtons";
 import "./globals.css";
 
 const geistSans = Geist({

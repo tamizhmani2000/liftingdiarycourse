@@ -30,6 +30,14 @@ No test runner is configured yet.
 ### CSS Theming
 `globals.css` defines CSS custom properties (`--background`, `--foreground`) and wires them into Tailwind's theme via `@theme inline`. Dark mode uses `prefers-color-scheme`. Font variables set in `layout.tsx` are exposed to Tailwind as `--font-sans` and `--font-mono` via the same `@theme inline` block.
 
+## Docs-First Rule
+
+**IMPORTANT**: Before generating any code, Claude Code MUST first read and consult the relevant documentation files in the `/docs` directory. All implementation decisions should align with the guidelines found there.
+
+- Check `/docs` for relevant doc files before writing or modifying any code
+- Currently available: `docs/ui.md`
+- If a relevant doc exists for the area being changed (UI, architecture, conventions, etc.), that doc takes precedence over assumptions
+
 ### Conventions
 - Path alias `@/*` maps to `src/*`
 - Client components require `'use client'` directive; all others are server components
