@@ -2,6 +2,14 @@ import { db } from '@/db';
 import { workouts, workoutExercises, exercises, sets } from '@/db/schema';
 import { and, eq, gte, lt } from 'drizzle-orm';
 
+export async function createWorkout(userId: string, startedAt: Date, workoutName?: string) {
+  const [row] = await db
+    .insert(workouts)
+    .values({ userId, startedAt, workoutName })
+    .returning();
+  return row;
+}
+
 export async function getWorkoutsForUserOnDate(userId: string, date: Date) {
   const dayStart = new Date(date);
   dayStart.setHours(0, 0, 0, 0);
@@ -12,6 +20,7 @@ export async function getWorkoutsForUserOnDate(userId: string, date: Date) {
   return db
     .select({
       workoutId: workouts.id,
+      workoutName: workouts.workoutName,
       startedAt: workouts.startedAt,
       completedAt: workouts.completedAt,
       exerciseName: exercises.name,
@@ -23,9 +32,9 @@ export async function getWorkoutsForUserOnDate(userId: string, date: Date) {
       weight: sets.weight,
     })
     .from(workouts)
-    .innerJoin(workoutExercises, eq(workoutExercises.workoutId, workouts.id))
-    .innerJoin(exercises, eq(exercises.id, workoutExercises.exerciseId))
-    .innerJoin(sets, eq(sets.workoutExerciseId, workoutExercises.id))
+    .leftJoin(workoutExercises, eq(workoutExercises.workoutId, workouts.id))
+    .leftJoin(exercises, eq(exercises.id, workoutExercises.exerciseId))
+    .leftJoin(sets, eq(sets.workoutExerciseId, workoutExercises.id))
     .where(
       and(
         eq(workouts.userId, userId),
