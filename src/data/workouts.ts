@@ -46,3 +46,22 @@ export async function getWorkoutsForUserOnDate(userId: string, date: Date) {
 }
 
 export type WorkoutRow = Awaited<ReturnType<typeof getWorkoutsForUserOnDate>>[number];
+
+export async function getWorkout(workoutId: number, userId: string) {
+  const rows = await db
+    .select()
+    .from(workouts)
+    .where(and(eq(workouts.id, workoutId), eq(workouts.userId, userId)));
+  return rows[0] ?? null;
+}
+
+export async function updateWorkout(
+  workoutId: number,
+  userId: string,
+  data: { workoutName: string; startedAt: Date },
+) {
+  await db
+    .update(workouts)
+    .set({ workoutName: data.workoutName, startedAt: data.startedAt })
+    .where(and(eq(workouts.id, workoutId), eq(workouts.userId, userId)));
+}
