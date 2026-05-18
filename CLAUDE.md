@@ -35,7 +35,7 @@ No test runner is configured yet.
 **IMPORTANT**: Before generating any code, Claude Code MUST first read and consult the relevant documentation files in the `/docs` directory. All implementation decisions should align with the guidelines found there.
 
 - Check `/docs` for relevant doc files before writing or modifying any code
-- Currently available: `docs/ui.md`
+- Currently available: `docs/ui.md`, `docs/data-fetching.md`, `docs/data-mutations.md`, `docs/auth.md`, `docs/server-components.md`, `docs/routing.md`
 - If a relevant doc exists for the area being changed (UI, architecture, conventions, etc.), that doc takes precedence over assumptions
 
 ### Conventions
