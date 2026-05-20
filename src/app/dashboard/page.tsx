@@ -44,7 +44,7 @@ export default async function DashboardPage({
 
   return (
     <main className="min-h-screen p-6 md:p-10 max-w-5xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Workout Log</h1>
+      <h1 className="text-2xl font-bold mb-6">Excsrcise log</h1>
 
       <div className="mb-8">
         <DatePicker selected={selectedDate} />
