@@ -70,32 +70,37 @@ export default async function DashboardPage({
           <ul className="flex flex-col gap-3">
             {Array.from(grouped.entries()).map(([workoutId, { workoutName, exercises }]) => (
               <li key={workoutId}>
-                <Card>
-                  <CardHeader className="pb-1 pt-4 px-4">
-                    <CardTitle className="text-base">{workoutName ?? 'Unnamed Workout'}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="px-4 pb-4">
-                    {exercises.size === 0 ? (
-                      <p className="text-sm text-muted-foreground">No exercises added yet.</p>
-                    ) : (
-                      <ul className="flex flex-col gap-3">
-                        {Array.from(exercises.entries()).map(([exerciseName, sets]) => (
-                          <li key={exerciseName}>
-                            <p className="text-sm font-medium mb-1">{exerciseName}</p>
-                            <ul className="flex flex-col gap-1">
-                              {sets.map((s) => (
-                                <li key={s.setId} className="text-sm text-muted-foreground">
-                                  Set {s.setNumber}: {s.reps ?? '—'} reps
-                                  {s.weight ? ` — ${s.weight} kg` : ''}
-                                </li>
-                              ))}
-                            </ul>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </CardContent>
-                </Card>
+                <Link
+                  href={`/dashboard/workout/${workoutId}`}
+                  className="block rounded-xl transition-colors hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <Card>
+                    <CardHeader className="pb-1 pt-4 px-4">
+                      <CardTitle className="text-base">{workoutName ?? 'Unnamed Workout'}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="px-4 pb-4">
+                      {exercises.size === 0 ? (
+                        <p className="text-sm text-muted-foreground">No exercises added yet.</p>
+                      ) : (
+                        <ul className="flex flex-col gap-3">
+                          {Array.from(exercises.entries()).map(([exerciseName, sets]) => (
+                            <li key={exerciseName}>
+                              <p className="text-sm font-medium mb-1">{exerciseName}</p>
+                              <ul className="flex flex-col gap-1">
+                                {sets.map((s) => (
+                                  <li key={s.setId} className="text-sm text-muted-foreground">
+                                    Set {s.setNumber}: {s.reps ?? '—'} reps
+                                    {s.weight ? ` — ${s.weight} kg` : ''}
+                                  </li>
+                                ))}
+                              </ul>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Link>
               </li>
             ))}
           </ul>
